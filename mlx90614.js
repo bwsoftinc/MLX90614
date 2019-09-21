@@ -21,7 +21,7 @@ ADDR_ID2         = 0x3E,
 ADDR_ID3         = 0x3D,
 ADDR_ID4         = 0x3F,
 
-//
+//config registers
 CFG_IRR          = 0x00,
 CFG_FIR          = 0x06,
 CFG_DUAL         = 0x01,
@@ -31,7 +31,7 @@ class mlx90614 {
   constructor(busId, address) {
     this.ADDRESS = address || 0x5A;
     this.bus = require('i2c-bus').openSync(busId || 1);
-    this.dualZone = !!(await this.readWordSync(ADDR_CONFIG) & 0x40);
+    this.dualZone = !!(this.bus.readWordSync(this.ADDRESS, ADDR_CONFIG)  & 0x40);
   }
 
   readWord(reg) {
