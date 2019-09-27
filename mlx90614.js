@@ -55,7 +55,7 @@ class mlx90614 {
   async readTemp(reg) {
     var mKelvins = await this.readWord(reg);
     var celcius = (mKelvins * 0.02) - 273.15;
-    return 32 + celcius * 9 / 5;
+    return (32 + celcius * 9 / 5).toFixed(3);
   }
 
   async readAmbient() {
